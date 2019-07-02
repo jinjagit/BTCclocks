@@ -1,5 +1,5 @@
 # BTC Clocks
-dual timezone digital clocks + BTC ticker
+dual time-zone digital clocks + BTC ticker
 
 ### To get started
 
