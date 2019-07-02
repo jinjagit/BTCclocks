@@ -35,6 +35,7 @@ p {
 
 .label {
   font-family: 'Ubuntu', sans-serif;
+  margin-left: -7px;
 }
 
 .grey {
