@@ -24,6 +24,6 @@ Uses the CoinDesk API.
 
 Current and previous day's close price are requested from the API and displayed at app startup, and following this:
 
-  Current price is requested every minute, at 5 seconds before the clock minute completes (every h/m/55), and is displayed as the clock minute completes (every h/m/00).
+  - Current price is requested every minute, at 5 seconds before the clock minute completes (every h/m/55), and is displayed as the clock minute completes (every h/m/00).
 
-  Close price is requested at 50 seconds past each clock hour (every h/00/50). This avoids needing to 'know' when a previous day 'close' occurs on CoinDesk (which would require establishing the local timezone of the browser - not complex to do, but unnecessary).
+  - Close price is requested at 50 seconds past each clock hour (every h/00/50). This avoids needing to 'know' when a previous day 'close' occurs on CoinDesk (which would require establishing the local timezone of the browser - not complex to do, but unnecessary).
