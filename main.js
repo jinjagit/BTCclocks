@@ -17,7 +17,7 @@ const clockTick = () => {
     calcPercent();
     priceText.innerHTML = '$' + usdString;
   }
-  if (m == 0 && s == 50) {
+  if (m == 0 && s == 50) { // maybe call every 10 mins??
     getPrice("https://api.coindesk.com/v1/bpi/historical/close.json?for=yesterday");
   }
 
@@ -25,7 +25,10 @@ const clockTick = () => {
   if (m < 10) { m = "0" + m; }
   if (s < 10) { s = "0" + s; }
 
-  var h2 = h - 4; // Offset (hours) from local time
+  // DEBUG:
+  //if (s == "00") { console.log(`close: ${closePrice}, now: ${h}:${m}:${s}`); }
+
+  var h2 = h - 3; // Offset (hours) from local time
   if (h2 < 0) { h2 = 24 + h2; }
   else if (h2 < 10) {h2 = "0" + h2; }
 
@@ -66,16 +69,25 @@ const getPrice = (url) => {
 };
 
 const parse = (json) => {
-  if (json["bpi"]["USD"] != undefined) {
+  if (json["bpi"] != undefined && json["bpi"]["USD"] != undefined) {
     usdString = json["bpi"]["USD"]["rate"].split('.')[0];
     //var gbpValue = "&pound;" + json["bpi"]["GBP"]["rate"];
     //var euroValue = "&euro;" + json["bpi"]["EUR"]["rate"];
 
     price = parseInt(usdString.replace(',',''));
-  } else {
+  } else if (json["bpi"] != undefined) {
     var obj = json["bpi"];
 
     for (var key in obj) {
+      if ((parseInt(obj[key])) != closePrice && closePrice != 0) {
+        var d = new Date();
+        var h = d.getHours();
+        var m = d.getMinutes();
+        var s = d.getSeconds();
+        console.log(`NEW CLOSE: ${h}:${m}:${s}`);
+      } else {
+        console.log(closePrice);
+      }
       closePrice = (parseInt(obj[key]));
     }
   }
